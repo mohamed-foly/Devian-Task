@@ -13,7 +13,7 @@ class GithubSearchRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class GithubSearchRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'date'=>'required|date_format:Y-m-d|before_or_equal:today',
+            'order_way'=>'in:asc,desc',
+            'per_page'=>'numeric|max:100'
         ];
     }
 }
