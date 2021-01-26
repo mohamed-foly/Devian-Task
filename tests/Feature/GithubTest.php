@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Services\Github;
 
 class GithubTest extends TestCase
 {
@@ -13,10 +14,10 @@ class GithubTest extends TestCase
      *
      * @return void
      */
-    public function testExample()
+    public function testSearch()
     {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
+        $github = new Github();
+        $result = $github->search('2010-01-01','desc',3);
+        $this->assertCount(3, $result->items);
     }
 }
